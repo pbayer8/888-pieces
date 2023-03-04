@@ -37,6 +37,11 @@
     "A triviality.",
     "I'm more of a salty than a sweet person.",
     "Ok.",
+    "It's over.",
+    "It's beginning.",
+    "I do remember, it smelled awful.",
+    "You like cards.",
+    "I do like cards.",
   ];
   let content = poem[Math.floor(Math.random() * poem.length)];
   let person = true;
@@ -92,11 +97,11 @@
 
 <div
   style:background-image="url('/numbered/{index}.png')"
-  on:click={handleClick}
+  on:pointerdown={handleClick}
   on:keydown={handleClick}
   on:mousemove={handleClick}
 />
-<p style={person ? "top: 0; left: 2rem;" : "bottom: 0; right: 2rem;"}>
+<p style={person ? "top: 1rem; left: 1rem;" : "bottom: 1rem; right: 1rem;"}>
   {content}
 </p>
 
@@ -128,5 +133,6 @@
     background: white;
     position: fixed;
     font-size: 1.6rem;
+    margin: 0;
   }
 </style>
