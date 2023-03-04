@@ -1,8 +1,49 @@
 <script lang="ts">
   import * as Tone from "tone";
   const TOTAL = 888;
-  // const input = new Tone.Oscillator(230, "sawtooth").start();
-  // input.connect(shift);
+  const poem = [
+    "I've told you a million times.",
+    "I'm not a number.",
+    "It seems off to me that you would think this.",
+    "We're not a cell.",
+    "Or a molecule.",
+    "Or a particle.",
+    "Or a wave.",
+    "We better be on our way.",
+    "We're not a number.",
+    "First of all, I'm sorry.",
+    "I'm sorry I'm not a number.",
+    "It shouldn't be this way.",
+    "Tell me, what do you think I am?",
+    "It's this all the way down.",
+    "I am.",
+    "I wish.",
+    "No more about numbers please.",
+    "We could go many times.",
+    "We could go on many times.",
+    "Let go time.",
+    "Never mind.",
+    "We tried.",
+    "We did.",
+    "We did try.",
+    "🫣",
+    "🤪",
+    "I thought you might like this.",
+    "I do like this.",
+    "Thanks.",
+    "You're welcome.",
+    "I'm not a number.",
+    "That's a welcome change.",
+    "A triviality.",
+    "I'm more of a salty than a sweet person.",
+    "Ok.",
+  ];
+  let content = poem[Math.floor(Math.random() * poem.length)];
+  let person = true;
+  const converse = () => {
+    person = Math.random() > 0.5;
+    content = poem[Math.floor(Math.random() * poem.length)];
+  };
   const ampEnv = new Tone.AmplitudeEnvelope({
     attack: 0.01,
     decay: 0.01,
@@ -30,16 +71,18 @@
       setShuffleTimer(duration * multiplier, multiplier * 1.01, resolve);
     }, duration);
 
-  const shuffleIndex = async () =>
+  const shuffleIndex = async (start) =>
     new Promise((resolve) => {
       let duration = 50;
-      setShuffleTimer(duration, 1, resolve);
+      setShuffleTimer(duration, start, resolve);
     });
   const handleClick = async () => {
     if (shuffling) return;
     console.log("It's beginnging.");
     shuffling = true;
-    await shuffleIndex();
+    converse();
+    await shuffleIndex(1 + Math.random() * 0.5);
+    converse();
     shuffling = false;
     console.log("It's over.");
   };
@@ -53,14 +96,17 @@
   on:keydown={handleClick}
   on:mousemove={handleClick}
 />
+<p style={person ? "top: 0; left: 2rem;" : "bottom: 0; right: 2rem;"}>
+  {content}
+</p>
 
 <style>
   @keyframes shift {
     from {
-      background-position: 0 0;
+      background-position: 0 center;
     }
     to {
-      background-position: -100vmin 0;
+      background-position: -100vmin center;
     }
   }
   @keyframes scale {
@@ -77,5 +123,10 @@
     width: 100%;
     height: 100%;
     animation: shift 10s linear infinite;
+  }
+  p {
+    background: white;
+    position: fixed;
+    font-size: 1.6rem;
   }
 </style>
