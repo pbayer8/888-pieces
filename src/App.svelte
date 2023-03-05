@@ -43,6 +43,8 @@
     "I do remember, it smelled awful.",
     "You like cards.",
     "I do like cards.",
+    "I miss you.",
+    "I miss you too.",
   ];
   let content = poem[Math.floor(Math.random() * poem.length)];
   let person = true;
