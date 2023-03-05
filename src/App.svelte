@@ -158,6 +158,7 @@
     position: fixed;
     font-size: 1.6rem;
     margin: 0;
+    pointer-events: none;
   }
   .warning {
     position: fixed;
