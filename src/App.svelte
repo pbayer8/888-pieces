@@ -95,7 +95,7 @@
 </script>
 
 <div
-  style:background-image="url('/numbered/{index}.png')"
+  style:background-image="url('./numbered/{index}.png')"
   on:pointerdown={handleClick}
   on:keydown={handleClick}
   on:mousemove={handleClick}
