@@ -66,7 +66,8 @@
   lfo.start();
   lfo2.start();
   ampEnv.triggerAttackRelease("8t");
-  const shuffle = () => Math.floor(Math.random() * TOTAL);
+  const loaded = [Math.floor(Math.random() * TOTAL)];
+  const shuffle = () => loaded[Math.floor(Math.random() * loaded.length)];
   let index = shuffle();
   let shuffling = false;
   const setShuffleTimer = async (duration, multiplier, resolve) =>
@@ -92,6 +93,13 @@
     shuffling = false;
     console.log("It's over.");
   };
+  for (let i = 0; i < TOTAL; i++) {
+    let img = new Image();
+    img.src = `./numbered/${i}.png`;
+    img.onload = () => {
+      loaded.push(i);
+    };
+  }
 </script>
 
 <div
