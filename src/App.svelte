@@ -95,7 +95,7 @@
   };
   for (let i = 0; i < TOTAL; i++) {
     let img = new Image();
-    img.src = `./numbered/${i}.png`;
+    img.src = `./numbered/${i}.jpg`;
     img.onload = () => {
       loaded.push(i);
     };
@@ -103,7 +103,7 @@
 </script>
 
 <div
-  style:background-image="url('./numbered/{index}.png')"
+  style:background-image="url('./numbered/{index}.jpg')"
   on:pointerdown={handleClick}
   on:keydown={handleClick}
   on:mousemove={handleClick}
