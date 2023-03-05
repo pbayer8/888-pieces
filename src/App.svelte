@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Tone from "tone";
   const TOTAL = 888;
+  let warned = false;
   const poem = [
     "I've told you a million times.",
     "I'm not a number.",
@@ -93,17 +94,32 @@
   };
 </script>
 
-<svelte:body on:click={() => Tone.start()} />
-
 <div
   style:background-image="url('/numbered/{index}.png')"
   on:pointerdown={handleClick}
   on:keydown={handleClick}
   on:mousemove={handleClick}
+  style:pointer-events={warned ? "auto" : "none"}
 />
-<p style={person ? "top: 1rem; left: 1rem;" : "bottom: 1rem; right: 1rem;"}>
-  {content}
-</p>
+{#if warned}
+  <p style={person ? "top: 1rem; left: 1rem;" : "bottom: 1rem; right: 1rem;"}>
+    {content}
+  </p>
+{/if}
+{#if !warned}
+  <div class="warning">
+    <p>This website contains rapidly flashing images.</p>
+    <button
+      on:click={() => {
+        warned = true;
+        Tone.start();
+        handleClick();
+      }}
+    >
+      I understand.
+    </button>
+  </div>
+{/if}
 
 <style>
   @keyframes shift {
@@ -134,5 +150,21 @@
     position: fixed;
     font-size: 1.6rem;
     margin: 0;
+  }
+  .warning {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .warning > * {
+    position: relative;
+    display: block;
+    font: 1.6rem serif;
   }
 </style>
